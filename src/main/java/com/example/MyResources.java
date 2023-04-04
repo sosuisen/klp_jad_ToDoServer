@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 @Path("todos")
 public class MyResources {
 	// フルパスで指定
-	private String dbPath = "c:\\pleiades-jad2023\\workspace\\ToDo\\jad.db";
+	private String dbPath = "c:\\\\pleiades-jad2023\\\\workspace\\\\ToDo\\\\jad.db";
 	private final DAO dao = new DAO("jdbc:sqlite:" + dbPath);
 
 	@GET
