@@ -3,6 +3,7 @@ package com.example;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -22,12 +23,14 @@ public class MyResources {
 	private final DAO dao = new DAO("jdbc:sqlite:" + dbPath);
 
 	@GET
+	@RolesAllowed({"ADMIN", "USER"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<ToDo> getAllToDos() {
 		return dao.getAll();
 	}
 
 	@GET
+	@RolesAllowed({"ADMIN", "USER"})
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo getTodo(@PathParam("id") Integer id) {
@@ -39,6 +42,7 @@ public class MyResources {
 	}
 
 	@POST
+	@RolesAllowed({"ADMIN"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo postToDo(@FormParam("title") String title) {
 		if (title == null) {
@@ -49,6 +53,7 @@ public class MyResources {
 	}
 
 	@PUT
+	@RolesAllowed({"ADMIN"})
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo putToDo(@PathParam("id") Integer id,
@@ -74,6 +79,7 @@ public class MyResources {
 	}
 
 	@DELETE
+	@RolesAllowed({"ADMIN"})
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo deleteToDo(@PathParam("id") Integer id) {
