@@ -1,0 +1,22 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'eclipse-wtp'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 17
+tasks.withType(JavaCompile) {options.encoding = 'UTF-8'}
+
+dependencies {
+	implementation 'org.xerial:sqlite-jdbc:3.41.2.1'
+
+	// Eclipse上で管理するTomcatサーバでJerseyを動作させるこの2つは必須
+	implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version: '2.39.1'
+	implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.39.1'
+	// JSON変換のために必要
+	implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-json-binding', version: '2.39.1'
+}
