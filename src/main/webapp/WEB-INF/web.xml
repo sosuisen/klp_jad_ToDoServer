@@ -5,7 +5,7 @@
 	version="4.0" metadata-complete="false">
 	<context-param>
 		<param-name>dbPath</param-name>
-		<param-value>c:\pleiades-jad2023\workspace\ToDo\jad.db</param-value>
+		<param-value>c:\pleiades-jad2023\workspace\ToDoServer\jad.db</param-value>
 	</context-param>
 
 	<servlet>

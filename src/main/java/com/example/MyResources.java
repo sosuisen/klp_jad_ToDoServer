@@ -21,25 +21,26 @@ import javax.ws.rs.core.MediaType;
 @Path("todos")
 public class MyResources {
 	private DAO dao;
+
 	// @Contextアノテーションと、それに続くメソッドは、
 	// このクラスのインスタンス化のときに呼び出されます。
 	// web.xml に書かれた <context-param> で設定されたパラメータ情報を持つ
 	// ServletContextオブジェクトが、
 	// このメソッドの引数 context へ自動的に注入されます。
-    @Context
-    public void setServletContext(ServletContext context) {
-    	dao = new DAO("jdbc:sqlite:" + context.getInitParameter("dbPath"));
-    }
+	@Context
+	public void setServletContext(ServletContext context) {
+		dao = new DAO("jdbc:sqlite:" + context.getInitParameter("dbPath"));
+	}
 
 	@GET
-	@RolesAllowed({"ADMIN", "USER"})
+	@RolesAllowed({ "ADMIN", "USER" })
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<ToDo> getAllToDos() {
 		return dao.getAll();
 	}
 
 	@GET
-	@RolesAllowed({"ADMIN", "USER"})
+	@RolesAllowed({ "ADMIN", "USER" })
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo getTodo(@PathParam("id") Integer id) {
@@ -51,7 +52,7 @@ public class MyResources {
 	}
 
 	@POST
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed({ "ADMIN" })
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo postToDo(@FormParam("title") String title) {
 		if (title == null) {
@@ -62,7 +63,7 @@ public class MyResources {
 	}
 
 	@PUT
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed({ "ADMIN" })
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo putToDo(@PathParam("id") Integer id,
@@ -88,7 +89,7 @@ public class MyResources {
 	}
 
 	@DELETE
-	@RolesAllowed({"ADMIN"})
+	@RolesAllowed({ "ADMIN" })
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ToDo deleteToDo(@PathParam("id") Integer id) {
