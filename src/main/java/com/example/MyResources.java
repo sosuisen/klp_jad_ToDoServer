@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.ServletContext;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -14,13 +15,21 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("todos")
 public class MyResources {
-	// フルパスで指定
-	private String dbPath = "c:\\pleiades-jad2023\\workspace\\ToDo\\jad.db";
-	private final DAO dao = new DAO("jdbc:sqlite:" + dbPath);
+	private DAO dao;
+	// @Contextアノテーションと、それに続くメソッドは、
+	// このクラスのインスタンス化のときに呼び出されます。
+	// web.xml に書かれた <context-param> で設定されたパラメータ情報を持つ
+	// ServletContextオブジェクトが、
+	// このメソッドの引数 context へ自動的に注入されます。
+    @Context
+    public void setServletContext(ServletContext context) {
+    	dao = new DAO("jdbc:sqlite:" + context.getInitParameter("dbPath"));
+    }
 
 	@GET
 	@RolesAllowed({"ADMIN", "USER"})

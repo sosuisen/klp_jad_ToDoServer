@@ -14,6 +14,9 @@ tasks.withType(JavaCompile) {options.encoding = 'UTF-8'}
 dependencies {
 	implementation 'org.xerial:sqlite-jdbc:3.41.2.1'
 
+	// @ContextアノテーションでServletContextオブジェクトを注入する場合に必要
+	compileOnly 'jakarta.servlet:jakarta.servlet-api:4.0.+'
+
 	// Eclipse上で管理するTomcatサーバでJerseyを動作させるこの2つは必須
 	implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version: '2.39.1'
 	implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.39.1'

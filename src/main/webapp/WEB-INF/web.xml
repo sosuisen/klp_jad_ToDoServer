@@ -3,6 +3,11 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	version="4.0" metadata-complete="false">
+	<context-param>
+		<param-name>dbPath</param-name>
+		<param-value>c:\pleiades-jad2023\workspace\ToDo\jad.db</param-value>
+	</context-param>
+
 	<servlet>
 		<servlet-name>MyApplication</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
