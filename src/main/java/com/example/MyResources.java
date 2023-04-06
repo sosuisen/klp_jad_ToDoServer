@@ -103,7 +103,6 @@ public class MyResources {
 
 	@DELETE
 	@RolesAllowed({ "ADMIN" })
-	@Produces(MediaType.APPLICATION_JSON)
 	public void deleteToDo() {
 		dao.deleteAll();
 	}
