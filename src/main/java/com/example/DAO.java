@@ -160,4 +160,15 @@ public class DAO {
 		}
 		return true;
 	}
+
+	public void deleteAll() {
+		try (
+				Connection conn = DriverManager.getConnection(url);
+				PreparedStatement pstmt = conn.prepareStatement("DELETE from todo");
+			) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

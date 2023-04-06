@@ -100,4 +100,11 @@ public class MyResources {
 		dao.delete(id);
 		return todo;
 	}
+
+	@DELETE
+	@RolesAllowed({ "ADMIN" })
+	@Produces(MediaType.APPLICATION_JSON)
+	public void deleteToDo() {
+		dao.deleteAll();
+	}
 }
